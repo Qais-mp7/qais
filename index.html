@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070b14">
+<meta name="description" content="QAIS HOST — بوابة PS4 تكشف إصدار النظام وتوجّه إلى المستضيف المطابق للإصدارين 11.00 و14.00.">
+<title>QAIS HOST | PS4</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--bg:#070b14;--panel:#101a2b;--line:#20334d;--text:#f3f7ff;--muted:#94a9c4;--blue:#45a7ff;--cyan:#54e5ff;--green:#45d6a0;--amber:#ffc76b}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:clamp(14px,3vw,28px);display:grid;place-items:center;background:radial-gradient(ellipse at 50% -10%,#173c68 0%,#0b1425 39%,var(--bg) 76%);font-family:Arial,"Segoe UI",sans-serif;color:var(--text)}
+.shell{width:min(760px,100%)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.brand{font-size:21px;font-weight:900;letter-spacing:2px}.brand span{color:var(--cyan)}
+.tag{border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--muted);font-size:11px;white-space:nowrap}
+.hero{text-align:center;margin:16px auto 23px}.eyebrow{color:var(--cyan);font-size:11px;letter-spacing:3px;font-weight:800}.hero h1{font-size:clamp(29px,6vw,45px);margin:11px 0 8px;line-height:1.15}.hero p{color:var(--muted);line-height:1.8;margin:0;font-size:14px}
+.card{background:linear-gradient(145deg,rgba(18,31,51,.97),rgba(9,17,30,.97));border:1px solid var(--line);border-radius:22px;padding:clamp(17px,4vw,25px);box-shadow:0 24px 70px #0008}
+.detect{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.label{font-size:12px;color:var(--muted);margin-bottom:7px}.firmware{font-size:clamp(32px,7vw,42px);font-weight:900;letter-spacing:1px}.pill{padding:8px 12px;border-radius:999px;background:#16304a;color:var(--cyan);font-size:11px;border:1px solid #245276}
+.bar{height:1px;background:var(--line);margin:19px 0}.status{display:flex;gap:11px;align-items:flex-start;line-height:1.7}.dot{width:9px;height:9px;border-radius:50%;background:var(--amber);margin-top:8px;flex:0 0 auto;box-shadow:0 0 14px currentColor}.status strong{display:block;margin-bottom:3px;font-size:15px}.status p{margin:0;color:var(--muted);font-size:13px}
+.progress{height:5px;background:#17283d;border-radius:99px;overflow:hidden;margin-top:17px}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px;transition:width .2s linear}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:19px}.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;border-radius:12px;padding:13px 14px;font-weight:800;font-size:13px;border:1px solid #286395;background:linear-gradient(90deg,#116bb7,#148fbd);color:white;cursor:pointer}.btn.secondary{background:#111e30;border-color:var(--line);color:#dceaff}.btn:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.notice{border:1px solid #5b4825;background:#211b12;color:#f4d39d;border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.9;margin-top:16px}
+.source{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:13px;margin-top:17px;color:var(--muted);font-size:11px}.source a{color:#87cbff;text-decoration:none}.source a:hover{text-decoration:underline}
+footer{color:#7589a3;text-align:center;font-size:11px;line-height:1.9;margin:16px auto 0;max-width:650px}.hide{display:none!important}
+@media(max-width:520px){header{margin-bottom:15px}.actions{grid-template-columns:1fr}.tag{font-size:10px}.card{border-radius:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header><div class="brand">QAIS <span>HOST</span></div><div class="tag">PS4 · AUTO DETECT</div></header>
+<section class="hero"><div class="eyebrow">PLAYSTATION 4</div><h1>بوابة تشغيل QAIS</h1><p>تتعرف على إصدار جهازك وتفتح المستضيف المناسب تلقائياً.</p></section>
+<section class="card" aria-live="polite">
+<div class="detect"><div><div class="label">إصدار النظام المكتشف</div><div class="firmware" id="firmware">جارٍ الفحص…</div></div><div class="pill" id="device">فحص المتصفح</div></div>
+<div class="bar"></div>
+<div class="status"><span class="dot" id="dot"></span><div><strong id="headline">جارٍ قراءة معلومات المتصفح</strong><p id="detail">يتم التحقق من أن الصفحة مفتوحة من متصفح PS4 وقراءة رقم النظام.</p><p id="countdown" aria-live="polite"></p></div></div>
+<div class="progress" id="progressBox"><span id="progress"></span></div>
+<div class="actions" id="actions"><a class="btn" id="openNow" href="#">فتح المستضيف الآن</a><button class="btn secondary" id="cancel" type="button">إلغاء التحويل التلقائي</button></div>
+<div class="notice" id="notice">هذه البوابة لا تنفّذ الاستغلال بنفسها؛ هي تكشف الإصدار ثم تفتح مستضيف المشروع الأصلي. نجاح أي محاولة غير مضمون.</div>
+<div class="source"><span id="routeName">بانتظار اكتشاف الإصدار</span><a id="sourceLink" href="https://github.com/" target="_blank" rel="noopener noreferrer">المصدر</a></div>
+</section>
+<footer>QAIS HOST · يدعم هذا الإصدار 11.00 و14.00 فقط. لا تحدّث جهازك لمجرد تشغيل هذا الموقع، ولا تعتبر أي رسالة تحميل دليلاً على نجاح التفعيل. بعد إعادة تشغيل PS4 قد تحتاج إلى إعادة العملية.</footer>
+</main>
+<script>
+(() => {
+'use strict';
+const HOSTS = {
+'11.00':{url:'https://rawgame4.github.io/',name:'RAWGAME4 · مسار 11.00',source:'https://github.com/rawgame4/rawgame4.github.io',headline:'تم اكتشاف 11.00 — المستضيف جاهز',detail:'يتم اختيار المسار تلقائياً. عند أول زيارة انتظر اكتمال CACHED داخل المستضيف، ثم اضغط X لبدء المحاولة؛ هذا الإصدار يحتاج هذه الخطوة اليدوية.',note:'تنبيه: مستضيف 11.00 يحتاج تأكيداً يدوياً بزر X بعد ظهور CACHED. قد تفشل المحاولة أو يعيد المتصفح التشغيل.'},
+'14.00':{url:'https://well0nez.github.io/afterglow-web/',name:'AFTERGLOW · مسار 14.00',source:'https://github.com/well0nez/afterglow-web',headline:'تم اكتشاف 14.00 — المستضيف جاهز',detail:'سيتم فتح Afterglow المنشور مباشرة. راجع خيارات HEN أو GoldHEN على الصفحة قبل المتابعة.',note:'تنبيه: Afterglow قد يفشل في بعض المحاولات أو يسبب إعادة تشغيل الجهاز. لا تغلق الصفحة أثناء المحاولة، والتحويل وحده لا يعني نجاحها.'}
+};
+const $=id=>document.getElementById(id);
+const ua=navigator.userAgent||'';
+const ps4=/PlayStation\s*4/i.test(ua);
+const match=ua.match(/PlayStation\s*4\s*[\/( ]\s*(\d{1,2}\.\d{2})/i)||ua.match(/PlayStation\s*4\s+(\d{1,2}\.\d{2})/i);
+const firmware=match?match[1]:null;
+let redirectTimer=null,progressTimer=null,cancelled=false;
+function paint(color){$('dot').style.background=color}
+function unsupported(title,message){$('headline').textContent=title;$('detail').textContent=message;$('progressBox').classList.add('hide');$('actions').classList.add('hide');$('routeName').textContent='لا يوجد تحويل';paint('var(--amber)')}
+function openTarget(host){window.location.replace(host.url)}
+setTimeout(()=>{
+if(!ps4){$('firmware').textContent='افتح من PS4';$('device').textContent='متصفح غير مدعوم';unsupported('هذه الصفحة مخصّصة لمتصفح PS4','افتح رابط QAIS HOST من Internet Browser على جهاز PS4 حتى تتمكن الصفحة من قراءة إصدار النظام تلقائياً.');return}
+if(!firmware){$('firmware').textContent='غير معروف';$('device').textContent='تعذّر الكشف';unsupported('لم أتمكن من قراءة رقم النظام','متصفح جهازك لم يرسل رقم Firmware ضمن User-Agent. لا يمكن اختيار المسار تلقائياً بأمان.');return}
+$('firmware').textContent=firmware;$('device').textContent='تم اكتشاف PS4';
+const host=HOSTS[firmware];
+if(!host){$('device').textContent='إصدار غير مدعوم هنا';unsupported('هذا الإصدار غير موجود في QAIS HOST','النسخة الحالية مجهزة فقط لـ 11.00 و14.00. لم يتم تحويلك إلى مستضيف غير مطابق.');return}
+$('headline').textContent=host.headline;$('detail').textContent=host.detail;$('notice').textContent=host.note;$('routeName').textContent=host.name;$('sourceLink').href=host.source;$('openNow').href=host.url;
+$('openNow').addEventListener('click',event=>{event.preventDefault();cancelled=true;clearInterval(progressTimer);clearTimeout(redirectTimer);openTarget(host)});
+$('cancel').addEventListener('click',()=>{cancelled=true;clearTimeout(redirectTimer);clearInterval(progressTimer);$('headline').textContent='تم إيقاف التحويل التلقائي';$('detail').textContent='يمكنك فتح المستضيف يدوياً من الزر الأول عندما تكون مستعداً.';$('progressBox').classList.add('hide');$('cancel').classList.add('hide');paint('var(--amber)')});
+paint('var(--green)');let ticks=0;const totalTicks=22;
+$('countdown').textContent='سيتم فتح المستضيف تلقائياً خلال ثانيتين…';
+progressTimer=setInterval(()=>{ticks++;$('progress').style.width=Math.min(100,ticks/totalTicks*100)+'%';const left=Math.max(0,Math.ceil((totalTicks-ticks)/10));$('countdown').textContent=left>0?'سيتم فتح المستضيف تلقائياً خلال '+left+' ثانية…':'جارٍ فتح المستضيف…';if(ticks>=totalTicks)clearInterval(progressTimer)},100);
+redirectTimer=setTimeout(()=>{clearInterval(progressTimer);if(!cancelled)openTarget(host)},2200);
+},450);
+})();
+</script>
+</body>
+</html>
