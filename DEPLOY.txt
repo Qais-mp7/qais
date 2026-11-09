@@ -1,0 +1,9 @@
+نشر QAIS HOST
+
+رابط الموقع المتوقع بعد اكتمال أول عملية نشر:
+https://qais-mp7.github.io/qais/
+
+ملفات المشروع ترفع إلى الفرع main. يوجد سير عمل GitHub Actions في:
+.github/workflows/pages.yml
+
+تحقق من تبويب Actions في GitHub لمعرفة حالة النشر.
